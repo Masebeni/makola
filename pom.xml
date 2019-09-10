@@ -34,6 +34,7 @@
 		</dependency>
 
 		<dependency>
+<<<<<<< HEAD
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
 			<version>2.7.0</version>
@@ -47,6 +48,8 @@
 		</dependency>
 
 		<dependency>
+=======
+>>>>>>> 0fa8d595e26f0f9de36b00abb1b1dc8838d2c8b5
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
@@ -56,6 +59,20 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+<<<<<<< HEAD
+=======
+
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-core</artifactId>
+			<version>2.2.8-b01</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-impl</artifactId>
+			<version>2.2-promoted-b65</version>
+		</dependency>
+>>>>>>> 0fa8d595e26f0f9de36b00abb1b1dc8838d2c8b5
 	</dependencies>
 
 	<build>
