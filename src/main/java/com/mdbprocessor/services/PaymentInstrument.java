@@ -1,7 +1,7 @@
-package com.mdbprocessor.pain001.service_implementation;
+package com.mdbprocessor.services;
 
-import com.mdbprocessor.pain001.entity_model.Pain001;
-import com.mdbprocessor.pain001.repository.Pain001Repository;
+import com.mdbprocessor.systems.Pain001;
+import com.mdbprocessor.repository.Pain001Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,9 +9,17 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class Pain001ServiceImpl extends Pain001 {
+public class PaymentInstrument {
     @Autowired
     private Pain001Repository pain001Repository;
+
+    /*
+    no need extend anything
+    pain1 xml,
+    no pain..paymtn
+
+
+     */
 
     public void setPain001Repository(Pain001Repository pain001Repository) {
         this.pain001Repository = pain001Repository;

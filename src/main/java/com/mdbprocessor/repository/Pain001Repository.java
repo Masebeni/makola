@@ -1,6 +1,6 @@
-package com.mdbprocessor.pain001.repository;
+package com.mdbprocessor.repository;
 
-import com.mdbprocessor.pain001.entity_model.Pain001;
+import com.mdbprocessor.systems.Pain001;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

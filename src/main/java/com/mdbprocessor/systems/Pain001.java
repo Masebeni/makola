@@ -1,14 +1,23 @@
-package com.mdbprocessor.pain001.entity_model;
+package com.mdbprocessor.systems;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 @Table(name = "Pain001")
 public class Pain001 {
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    @Column(name = "messsage_id")
+    private String message_id;
+
+    @Column(name = "PmtInfId")
+    private String PmtInfId;
+    
     public Long getId() {
         return id;
     }
@@ -33,15 +42,7 @@ public class Pain001 {
         PmtInfId = pmtInfId;
     }
 
-    @Id
-    @GeneratedValue
-    private Long id;
 
-    @Column(name = "messsage_id")
-    private String message_id;
-
-    @Column(name = "PmtInfId")
-    private String PmtInfId;
 
 
 }

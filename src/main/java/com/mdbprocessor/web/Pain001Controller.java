@@ -1,9 +1,6 @@
-package com.mdbprocessor.pain001.rest_controller;
+package com.mdbprocessor.web;
 
-import com.mdbprocessor.pain001.entity_model.Pain001;
-import com.mdbprocessor.pain001.service.Pain001Service;
-import com.mdbprocessor.pain001.service_implementation.Pain001ServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.mdbprocessor.systems.Pain001;
 import org.springframework.web.bind.annotation.*;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -16,6 +13,7 @@ import java.util.List;
 @XmlRootElement(name = "GrpHdr")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Pain001Controller {
+    /*
     @XmlElement(name = "GrpHdr")
     public Pain001Service pain001Service;
 
@@ -53,5 +51,5 @@ public class Pain001Controller {
         if (pain001 != null) {
             pain001Service.updatePain001(pain001);
         }
-    }
+    }*/
 }

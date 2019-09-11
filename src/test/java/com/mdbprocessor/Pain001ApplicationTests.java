@@ -1,4 +1,4 @@
-package com.mdbprocessor.pain001;
+package com.mdbprocessor;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

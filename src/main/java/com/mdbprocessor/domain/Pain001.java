@@ -1,15 +1,26 @@
-package com.mdbprocessor.pain001.model;
+package com.mdbprocessor.domain;
 
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name = "Pain001")
+@Entity
+@Table(name = "Pain001")
+@XmlRootElement(name = "CstmrCdtTrfInitn")
 @XmlAccessorType(XmlAccessType.FIELD)
-
 public class Pain001 {
+    @XmlElement(name = "GrpHdr")
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    @Column(name = "MsgId")
     private String MsgId;
-    private Integer NbOfTxs;
+
+    @Column(name = "PmtInfId")
+    private String PmtInfId;
 
     public String getMsgId() {
         return MsgId;
@@ -17,14 +28,6 @@ public class Pain001 {
 
     public void setMsgId(String msgId) {
         this.MsgId = msgId;
-    }
-
-    public Integer getNbOfTxs() {
-        return NbOfTxs;
-    }
-
-    public void setNbOfTxs(Integer nbOfTxs) {
-        this.NbOfTxs = nbOfTxs;
     }
 
 }

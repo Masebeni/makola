@@ -1,7 +1,7 @@
-package com.mdbprocessor.pain001;
+package com.mdbprocessor;
 
-import com.mdbprocessor.pain001.entity_model.Pain001;
-import com.mdbprocessor.pain001.service_implementation.Pain001ServiceImpl;
+import com.mdbprocessor.systems.Pain001;
+import com.mdbprocessor.services.PaymentInstrument;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -19,11 +19,11 @@ public class Pain001Application {
 	}
 
 	private static void unMarshaling() throws JAXBException {
-		JAXBContext jaxbContext = JAXBContext.newInstance(Pain001.class);
+		JAXBContext jaxbContext = JAXBContext.newInstance(PaymentInstrument.class);
 		Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-		Pain001 pain001s = (Pain001ServiceImpl) jaxbUnmarshaller.unmarshal(new File("c:/temp/pain001.xml"));
+		PaymentInstrument pain001s = (PaymentInstrument) jaxbUnmarshaller.unmarshal(new File("c:/temp/pain001.xml"));
 
-		for (Pain001 pain001 : ((Pain001ServiceImpl) pain001s).getPain001s()) {
+		for (Pain001 pain001 : ((PaymentInstrument) pain001s).getPain001s()) {
 			System.out.println(pain001.getId());
 			System.out.println(pain001.getMessage_id());
 		}
