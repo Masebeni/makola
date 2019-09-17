@@ -13,14 +13,6 @@ public class PaymentInstrument {
     @Autowired
     private Pain001Repository pain001Repository;
 
-    /*
-    no need extend anything
-    pain1 xml,
-    no pain..paymtn
-
-
-     */
-
     public void setPain001Repository(Pain001Repository pain001Repository) {
         this.pain001Repository = pain001Repository;
     }

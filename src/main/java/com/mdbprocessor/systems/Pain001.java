@@ -10,19 +10,32 @@ import javax.xml.bind.annotation.XmlAccessorType;
 public class Pain001 {
     @Id
     @GeneratedValue
-    private Long id;
+    private Integer id;
 
     @Column(name = "messsage_id")
     private String message_id;
 
-    @Column(name = "PmtInfId")
-    private String PmtInfId;
-    
-    public Long getId() {
+    @Column(name = "xml")
+    private String xml;
+
+    public Pain001(String message_id, String xml) {
+        this.message_id = message_id;
+        this.xml = xml;
+    }
+
+    public String getXml() {
+        return xml;
+    }
+
+    public void setXml(String xml) {
+        this.xml = xml;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -33,17 +46,5 @@ public class Pain001 {
     public void setMessage_id(String message_id) {
         this.message_id = message_id;
     }
-
-    public String getPmtInfId() {
-        return PmtInfId;
-    }
-
-    public void setPmtInfId(String pmtInfId) {
-        PmtInfId = pmtInfId;
-    }
-
-
-
-
 }
 

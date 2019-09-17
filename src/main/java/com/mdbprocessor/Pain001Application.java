@@ -7,27 +7,29 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
+import java.io.FileOutputStream;
 
 @SpringBootApplication
 public class Pain001Application {
 
 	public static void main(String[] args) throws JAXBException {
-		//unMarshaling();
+		//marshaling();
 		SpringApplication.run(Pain001Application.class, args);
 	}
 
-	private static void unMarshaling() throws JAXBException {
-		JAXBContext jaxbContext = JAXBContext.newInstance(PaymentInstrument.class);
-		Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-		PaymentInstrument pain001s = (PaymentInstrument) jaxbUnmarshaller.unmarshal(new File("c:/temp/pain001.xml"));
+	private static void marshaling() throws JAXBException {
+		try{
+			JAXBContext jContext = JAXBContext.newInstance(Pain001.class);
+			Marshaller marshallObj = jContext.createMarshaller();
+			marshallObj.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+			Pain001 pain001 = new Pain001("Xolela", "Masebeni");
+			marshallObj.marshal(pain001, new FileOutputStream("c:/temp/pain001.xml"));
 
-		for (Pain001 pain001 : ((PaymentInstrument) pain001s).getPain001s()) {
-			System.out.println(pain001.getId());
-			System.out.println(pain001.getMessage_id());
+		} catch(Exception e) {
+			e.printStackTrace();
 		}
-		System.out.println("======== DONE UNMARSHALING ========");
 	}
-
 }
