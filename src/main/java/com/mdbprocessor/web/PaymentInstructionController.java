@@ -28,12 +28,12 @@ public class PaymentInstructionController {
 
     @DeleteMapping("/files/{id}")
     private void deletePaymentInstruction(@PathVariable("id") int id) {
-        paymentInstructionService.delete(id);
+        paymentInstructionService.deletePaymentInstructionById(id);
     }
 
     @PostMapping("/files")
     private int savePaymentInstruction(@RequestBody PaymentInstruction paymentInstruction) {
-        paymentInstructionService.saveOrUpdate(paymentInstruction);
+        paymentInstructionService.saveOrUpdatePaymentInstruction(paymentInstruction);
         return paymentInstruction.getId();
     }
 }
