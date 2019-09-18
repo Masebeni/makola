@@ -1,7 +1,7 @@
-package com.mdbprocessor.services;
+package com.fileprocessor.services;
 
-import com.mdbprocessor.persistence.PaymentInstruction;
-import com.mdbprocessor.repository.PaymentInstructionRepository;
+import com.fileprocessor.persistence.PaymentInstruction;
+import com.fileprocessor.repository.PaymentInstructionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

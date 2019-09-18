@@ -1,7 +1,7 @@
-package com.mdbprocessor.web;
+package com.fileprocessor.web;
 
-import com.mdbprocessor.persistence.PaymentInstruction;
-import com.mdbprocessor.services.PaymentInstructionService;
+import com.fileprocessor.persistence.PaymentInstruction;
+import com.fileprocessor.services.PaymentInstructionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

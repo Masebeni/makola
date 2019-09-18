@@ -1,4 +1,4 @@
-package com.mdbprocessor.persistence;
+package com.fileprocessor.persistence;
 
 import lombok.Data;
 import javax.persistence.*;
@@ -15,4 +15,8 @@ public class PaymentInstruction {
 
     @Lob
     private String xml;
+
+    public int getId() {
+        return id;
+    }
 }
