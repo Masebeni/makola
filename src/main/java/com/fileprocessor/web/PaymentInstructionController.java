@@ -22,7 +22,7 @@ public class PaymentInstructionController {
     }
 
     @GetMapping("/files/{id}")
-    private PaymentInstruction getPaymentInstruction(@PathVariable("id") int id) {
+    private PaymentInstruction getPaymentInstruction(@PathVariable("id") int id) throws Exception{
         return paymentInstructionService.getPaymentInstructionById(id);
     }
 
@@ -33,7 +33,7 @@ public class PaymentInstructionController {
 
     @PostMapping("/files")
     private int savePaymentInstruction(@RequestBody PaymentInstruction paymentInstruction) {
-        paymentInstructionService.saveOrUpdatePaymentInstruction(paymentInstruction);
+        paymentInstructionService.save(paymentInstruction);
         return paymentInstruction.getId();
     }
 }
