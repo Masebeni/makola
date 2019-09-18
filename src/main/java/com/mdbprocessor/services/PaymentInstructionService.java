@@ -2,25 +2,34 @@ package com.mdbprocessor.services;
 
 import com.mdbprocessor.persistence.PaymentInstruction;
 import com.mdbprocessor.repository.PaymentInstructionRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class PaymentInstructionService {
 
+    @Autowired
     private PaymentInstructionRepository paymentInstructionRepository;
 
-    @Autowired
-    public PaymentInstructionService(final PaymentInstructionRepository paymentInstructionRepository) {
-        this.paymentInstructionRepository = paymentInstructionRepository;
+    public List<PaymentInstruction> getAllPaymentInstructions() {
+        List<PaymentInstruction> paymentInstructions = new ArrayList<PaymentInstruction>();
+        paymentInstructionRepository.findAll()
+                .forEach(paymentInstruction -> paymentInstructions.add(paymentInstruction));
+        return paymentInstructions;
     }
 
-    public PaymentInstruction findFileById(final long id) {
-        System.out.println("------------ID:"+id);
-        PaymentInstruction paymentInstruction = paymentInstructionRepository.findFileById(id);
-        return paymentInstruction;
+    public PaymentInstruction getPaymentInstructionById(int id) {
+        return paymentInstructionRepository.findById(id).get();
+    }
+
+    public void saveOrUpdate(PaymentInstruction paymentInstruction) {
+        paymentInstructionRepository.save(paymentInstruction);
+    }
+
+    public void delete(int id) {
+        paymentInstructionRepository.deleteById(id);
     }
 }
