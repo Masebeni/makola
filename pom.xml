@@ -93,11 +93,15 @@
 			<artifactId>jaxb-impl</artifactId>
 			<version>2.2-promoted-b65</version>
 		</dependency>
-        <dependency>
-            <groupId>org.jvnet.jaxb2.maven2</groupId>
-            <artifactId>maven-jaxb2-plugin</artifactId>
-            <version>0.14.0</version>
-        </dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.module</groupId>
+			<artifactId>jackson-module-jaxb-annotations</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -105,6 +109,27 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>jaxb2-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>xjc</id>
+						<goals>
+							<goal>xjc</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<xjbSources>
+						<xjbSource>src/main/resources/pain/global.xjb</xjbSource>
+					</xjbSources>
+					<sources>
+						<source>src/main/resources/pain/pain001.xsd</source>
+					</sources>
+					<clearOutputDir>true</clearOutputDir>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

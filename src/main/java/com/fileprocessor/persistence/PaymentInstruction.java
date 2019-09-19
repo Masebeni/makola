@@ -1,10 +1,14 @@
 package com.fileprocessor.persistence;
 
+import com.sun.xml.txw2.annotation.XmlAttribute;
+import com.sun.xml.txw2.annotation.XmlElement;
 import lombok.Data;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Data
 @Entity
+@XmlRootElement
 public class PaymentInstruction {
     @Id
     @GeneratedValue
@@ -16,6 +20,7 @@ public class PaymentInstruction {
     @Lob
     private String xml;
 
+    @XmlAttribute
     public int getId() {
         return id;
     }
@@ -23,7 +28,7 @@ public class PaymentInstruction {
     public void setId(int id) {
         this.id = id;
     }
-
+    @XmlElement
     public String getMessageId() {
         return messageId;
     }
@@ -32,7 +37,8 @@ public class PaymentInstruction {
         this.messageId = messageId;
     }
 
-    public String getXml(String xml) {
+    @XmlElement
+    public String getXml() {
         return xml;
     }
 
