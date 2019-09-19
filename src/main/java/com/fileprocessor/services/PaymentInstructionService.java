@@ -2,6 +2,7 @@ package com.fileprocessor.services;
 
 import com.fileprocessor.persistence.PaymentInstruction;
 import com.fileprocessor.repository.PaymentInstructionRepository;
+import iso.std.iso._20022.tech.xsd.pain_001_001.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,9 @@ public class PaymentInstructionService {
 
     @Autowired
     private PaymentInstructionRepository paymentInstructionRepository;
+
+    @Autowired
+    private UtilityService utilityService;
 
     public void save(final PaymentInstruction paymentInstruction) {
         paymentInstructionRepository.save(paymentInstruction);
@@ -40,4 +44,8 @@ public class PaymentInstructionService {
         paymentInstructionRepository.deleteById(id);
     }
 
+    public void processPaymentInstruction(final String xml) {
+        Document pain001 = utilityService.unmarshall(xml);
+
+    }
 }

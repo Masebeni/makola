@@ -36,4 +36,9 @@ public class PaymentInstructionController {
         paymentInstructionService.save(paymentInstruction);
         return paymentInstruction.getId();
     }
+
+    @PostMapping("/files/xml")
+    private void processPaymentInstruction(@RequestBody String xml) {
+        paymentInstructionService.processPaymentInstruction(xml);
+    }
 }
