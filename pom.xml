@@ -44,6 +44,9 @@
 						</execution>
 					</executions>
 					<configuration>
+						<xjbSources>
+							<xjbSource>src/main/resources/pain/global.xjb</xjbSource>
+						</xjbSources>
 						<sources>
 							<source>src/main/resources/pain/pain001.xsd</source>
 						</sources>

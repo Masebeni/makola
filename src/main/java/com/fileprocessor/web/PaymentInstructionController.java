@@ -6,6 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.bind.JAXBException;
+import javax.xml.stream.XMLStreamException;
 import java.util.List;
 
 @RestController
@@ -22,23 +24,22 @@ public class PaymentInstructionController {
     }
 
     @GetMapping("/files/{id}")
-    private PaymentInstruction getPaymentInstruction(@PathVariable("id") int id) throws Exception{
+    private PaymentInstruction getPaymentInstruction(@PathVariable("id") String id) throws Exception{
         return paymentInstructionService.getPaymentInstructionById(id);
     }
 
     @DeleteMapping("/files/{id}")
-    private void deletePaymentInstruction(@PathVariable("id") int id) {
+    private void deletePaymentInstruction(@PathVariable("id") String id) {
         paymentInstructionService.deletePaymentInstructionById(id);
     }
 
     @PostMapping("/files")
-    private int savePaymentInstruction(@RequestBody PaymentInstruction paymentInstruction) {
+    private void savePaymentInstruction(@RequestBody PaymentInstruction paymentInstruction) {
         paymentInstructionService.save(paymentInstruction);
-        return paymentInstruction.getId();
     }
 
     @PostMapping("/files/xml")
-    private void processPaymentInstruction(@RequestBody String xml) {
+    private void processPaymentInstruction(@RequestBody String xml) throws JAXBException, XMLStreamException {
         paymentInstructionService.processPaymentInstruction(xml);
     }
 }

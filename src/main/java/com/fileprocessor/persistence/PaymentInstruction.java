@@ -4,16 +4,17 @@ import com.sun.xml.txw2.annotation.XmlAttribute;
 import com.sun.xml.txw2.annotation.XmlElement;
 import lombok.Data;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Data
 @Entity
 @XmlRootElement(name = "pain001")
 public class PaymentInstruction {
-    @Id
+
     @GeneratedValue
     private int id;
-
+    @Id
     @Column(name = "messageId")
     private String messageId;
 
