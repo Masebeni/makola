@@ -6,7 +6,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @Data
 @Entity
-@XmlRootElement(name = "pain001")
 public class PaymentInstruction {
 
     @GeneratedValue
