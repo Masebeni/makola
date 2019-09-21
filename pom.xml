@@ -35,6 +35,7 @@
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>jaxb2-maven-plugin</artifactId>
+					<version>2.3.1</version>
 					<executions>
 						<execution>
 							<id>xjc</id>
@@ -48,7 +49,7 @@
 							<xjbSource>src/main/resources/pain/global.xjb</xjbSource>
 						</xjbSources>
 						<sources>
-							<source>src/main/resources/pain/pain001.xsd</source>
+							<source>src/main/resources/pain/pain.001.001.05.xsd</source>
 						</sources>
 						<clearOutputDir>true</clearOutputDir>
 					</configuration>
@@ -66,26 +67,15 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-spring-boot-starter</artifactId>
-			<version>2.24.0</version>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.5</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
-		</dependency>
-
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-			<version>5.2.3.Final</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<version>5.2.12.Final</version>
 		</dependency>
 		<dependency>
 			<groupId>io.springfox</groupId>
@@ -101,15 +91,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.sun.xml.bind</groupId>
-			<artifactId>jaxb-core</artifactId>
-			<version>2.2.8-b01</version>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.module</groupId>
-			<artifactId>jackson-module-jaxb-annotations</artifactId>
 		</dependency>
 	</dependencies>
 

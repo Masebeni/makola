@@ -25,33 +25,23 @@ public class UtilityService {
     private static final Logger log = LoggerFactory.getLogger(UtilityService.class);
 
 
-    private PaymentInstructionRepository paymentInstructionRepository;
+    private JAXBContext pain001Context;
 
-    @Autowired
-    public UtilityService(PaymentInstructionRepository paymentInstructionRepository) {
-        this.paymentInstructionRepository = paymentInstructionRepository;
-    }
 
     public Document unmarshal(final String xml)throws JAXBException, XMLStreamException {
-        JAXBContext jaxbContext = JAXBContext.newInstance(iso.std.iso._20022.tech.xsd.pain_001_001.Document.class);
-        log.debug("\n\n======== Start unmarshalling ========");
-        Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+        pain001Context = JAXBContext.newInstance(iso.std.iso._20022.tech.xsd.pain_001_001.Document.class);
+        Unmarshaller unmarshaller = pain001Context.createUnmarshaller();
         XMLStreamReader reader = XMLInputFactory.newInstance().createXMLStreamReader(new StringReader(xml));
-        System.out.println("\n\n======== Start unmarshalling ========");
         Document pain001 = (Document) unmarshaller.unmarshal(reader);
-        System.out.println(pain001.getCstmrCdtTrfInitn().getGrpHdr().getMsgId());
-        System.out.println(pain001.getCstmrCdtTrfInitn().getGrpHdr().getCreDtTm());
-        //System.out.println(pain001.getCstmrCdtTrfInitn().getGrpHdr().getAuthstn());
-        log.debug("\n\n----> pain001: pain001:" + pain001);
-
         return  pain001;
     }
 
-  /*  public String marshal(final Document pain001) throws JAXBException{
-        Marshaller marshaller = jaxbContext.createMarshaller();
+    public String marshal(final Document pain001) throws JAXBException{
+        pain001Context = JAXBContext.newInstance(iso.std.iso._20022.tech.xsd.pain_001_001.Document.class);
+        Marshaller marshaller = pain001Context.createMarshaller();
         StringWriter stringWriter = new StringWriter();
         marshaller.marshal(pain001, stringWriter);
         return stringWriter.toString();
-    }*/
+    }
 
 }

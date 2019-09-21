@@ -51,5 +51,10 @@ public class PaymentInstructionService {
 
     public void processPaymentInstruction(final String xml) throws JAXBException, XMLStreamException {
         Document pain001 = utilityService.unmarshal(xml);
+        //TODO create payment instruction to post to db
+        //example
+        PaymentInstruction paymentInstruction = new PaymentInstruction();
+        paymentInstruction.setMessageId(pain001.getCstmrCdtTrfInitn().getGrpHdr().getMsgId());
+        paymentInstructionRepository.save(paymentInstruction);
     }
 }
