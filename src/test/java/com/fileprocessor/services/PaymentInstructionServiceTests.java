@@ -40,7 +40,7 @@ public class PaymentInstructionServiceTests {
         paymentInstruction.setMessageId("Poovan");
         paymentInstruction.setXml("xml");
         paymentInstructionService.save(paymentInstruction);
-         paymentInstructionRepository.findById("Poovan").get();
+         paymentInstructionRepository.findById("Poovan");
         System.out.println("\n\n======>getMessageId: "+paymentInstruction.getMessageId());
         Assert.assertEquals("Poovan",paymentInstruction.getMessageId());
     }

@@ -1,14 +1,9 @@
 package com.fileprocessor.services;
 
-import com.fileprocessor.PaymentProcessor;
-import com.fileprocessor.persistence.PaymentInstruction;
-import com.fileprocessor.repository.PaymentInstructionRepository;
 import iso.std.iso._20022.tech.xsd.pain_001_001.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -16,7 +11,6 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
-import java.io.File;
 import java.io.StringReader;
 import java.io.StringWriter;
 
@@ -33,6 +27,7 @@ public class UtilityService {
         Unmarshaller unmarshaller = pain001Context.createUnmarshaller();
         XMLStreamReader reader = XMLInputFactory.newInstance().createXMLStreamReader(new StringReader(xml));
         Document pain001 = (Document) unmarshaller.unmarshal(reader);
+        pain001.getCstmrCdtTrfInitn().getGrpHdr().getMsgId();
         return  pain001;
     }
 

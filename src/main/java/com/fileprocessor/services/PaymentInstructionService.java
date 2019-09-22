@@ -1,19 +1,15 @@
 package com.fileprocessor.services;
 
-import com.fileprocessor.PaymentProcessor;
 import com.fileprocessor.persistence.PaymentInstruction;
 import com.fileprocessor.repository.PaymentInstructionRepository;
-import iso.std.iso._20022.tech.xsd.pain_001_001.Document;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import javax.xml.bind.JAXBException;
 import javax.xml.stream.XMLStreamException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import iso.std.iso._20022.tech.xsd.pain_001_001.Document;
 
 @Service
 public class PaymentInstructionService {

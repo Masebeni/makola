@@ -1,7 +1,5 @@
 package com.fileprocessor.services;
 
-import com.fileprocessor.persistence.PaymentInstruction;
-import com.fileprocessor.repository.PaymentInstructionRepository;
 import iso.std.iso._20022.tech.xsd.pain_001_001.Document;
 import org.junit.Assert;
 import org.junit.Test;
@@ -26,7 +24,7 @@ public class UtilityServiceTest {
 
     @Test
     public void testValidXmlUnmarshall() throws JAXBException, XMLStreamException, IOException {
-        String xml = new String(Files.readAllBytes(Paths.get("src/test/resources/sample.xml")));
+        String xml = new String(Files.readAllBytes(Paths.get("src/main/resources/pain/pain.001.001.005.xml")));
         Document pain001 = utilityService.unmarshal(xml);
         Assert.assertEquals(pain001.getCstmrCdtTrfInitn().getGrpHdr().getMsgId(), "F/BWA/INT/AAH/20190918/11385736842");
     }
@@ -39,7 +37,7 @@ public class UtilityServiceTest {
 
     @Test
     public void testMarshal() throws JAXBException, XMLStreamException, IOException {
-        String xml = new String(Files.readAllBytes(Paths.get("src/test/resources/sample.xml")));
+        String xml = new String(Files.readAllBytes(Paths.get("src/main/resources/pain/pain.001.001.005.xml")));
         Document pain001 = utilityService.unmarshal(xml);
         String marshalString = utilityService.marshal(pain001);
         System.out.println(marshalString);
