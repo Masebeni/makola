@@ -1,9 +1,8 @@
 package com.fileprocessor.services;
 
-import com.fileprocessor.persistence.PaymentInstruction;
 import com.fileprocessor.repository.PaymentInstructionRepository;
+import iso.std.iso._20022.tech.xsd.pain_001_001.Document;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import lombok.extern.slf4j.Slf4j;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 @Ignore
 @RunWith(SpringRunner.class)
@@ -18,68 +19,44 @@ import lombok.extern.slf4j.Slf4j;
 public class PaymentInstructionServiceTests {
 
     @Autowired
+    private UtilityService utilityService;
+    @Autowired
     PaymentInstructionService paymentInstructionService;
     @Autowired
     PaymentInstructionRepository paymentInstructionRepository;
 
     @Test
-    public void testSaveOrUpdatePayment() throws Exception {
-        PaymentInstruction paymentInstruction = new PaymentInstruction();
-        paymentInstruction.setId(1);
-        paymentInstruction.setMessageId("Poovan");
-        paymentInstruction.setXml("xml");
-        paymentInstructionService.save(paymentInstruction);
-        System.out.println("\n\n=====> paymentInstruction: " + paymentInstruction);
-        Assert.assertNotEquals(null, paymentInstruction);
+    public void testSavePaymentInstruction() throws Exception {
+        String xml = new String(Files.readAllBytes(Paths.get("src/main/resources/pain/pain.001.001.005.xml")));
+        paymentInstructionService.processPaymentInstruction(xml);
+
+       Assert.assertNotEquals(null,paymentInstructionService.getAllPaymentInstructions());
     }
 
     @Test
     public void testGetPaymentInstructionByMessageId() throws Exception {
-        PaymentInstruction paymentInstruction = new PaymentInstruction();
-        paymentInstruction.setId(1);
-        paymentInstruction.setMessageId("Poovan");
-        paymentInstruction.setXml("xml");
-        paymentInstructionService.save(paymentInstruction);
-         paymentInstructionRepository.findById("Poovan");
-        System.out.println("\n\n======>getMessageId: "+paymentInstruction.getMessageId());
-        Assert.assertEquals("Poovan",paymentInstruction.getMessageId());
+        String xml = new String(Files.readAllBytes(Paths.get("src/main/resources/pain/pain.001.001.005.xml")));
+        paymentInstructionService.processPaymentInstruction(xml);
+        Document pain001 = utilityService.unmarshal(xml);
+
+        Assert.assertEquals(paymentInstructionService.getPaymentInstructionById("F/NBC/DRT/AAH/20190906/14444076377"),pain001.getCstmrCdtTrfInitn().getGrpHdr().getMsgId());
     }
 
     @Test
     public void testGetAllPaymentInstructions() throws Exception {
-        PaymentInstruction paymentInstruction = new PaymentInstruction();
-        paymentInstruction.setId(1);
-        paymentInstruction.setMessageId("Poovan");
-        paymentInstruction.setXml("xml");
-        paymentInstructionService.save(paymentInstruction);
+        String xml = new String(Files.readAllBytes(Paths.get("src/main/resources/pain/pain.001.001.005.xml")));
+        paymentInstructionService.processPaymentInstruction(xml);
 
-        paymentInstruction = new PaymentInstruction();
-        paymentInstruction.setId(2);
-        paymentInstruction.setMessageId("Liza");
-        paymentInstruction.setXml("xml");
-        paymentInstructionService.save(paymentInstruction);
-
-        paymentInstruction = new PaymentInstruction();
-        paymentInstruction.setId(3);
-        paymentInstruction.setMessageId("Xolela");
-        paymentInstruction.setXml("xml");
-        paymentInstructionService.save(paymentInstruction);
-
-        System.out.println("\n\n======>getAllPaymentInstructions: "+paymentInstructionService.getAllPaymentInstructions());
         Assert.assertEquals(true,paymentInstructionService.getAllPaymentInstructions().containsAll(paymentInstructionService.getAllPaymentInstructions()));
-
     }
 
     @Test
     public void testDeletePaymentInstructionById() throws Exception {
-        PaymentInstruction paymentInstruction = new PaymentInstruction();
-        paymentInstruction.setId(1);
-        paymentInstruction.setMessageId("Poovan");
-        paymentInstruction.setXml("xml");
-        paymentInstructionService.save(paymentInstruction);
-        paymentInstructionRepository.delete(paymentInstructionService.getPaymentInstructionById("Poovan"));
-        System.out.println("\n\n======>PaymentInstructionById: "+paymentInstructionService.getPaymentInstructionById("Poovan"));
-        Assert.assertEquals(null, paymentInstructionService.getPaymentInstructionById("Poovan"));
+        String xml = new String(Files.readAllBytes(Paths.get("src/main/resources/pain/pain.001.001.005.xml")));
+        paymentInstructionService.processPaymentInstruction(xml);
+        paymentInstructionRepository.deleteById("F/NBC/DRT/AAH/20190906/14444076377");
+
+        Assert.assertEquals(null, paymentInstructionService.getPaymentInstructionById("F/NBC/DRT/AAH/20190906/14444076377"));
     }
 
 }

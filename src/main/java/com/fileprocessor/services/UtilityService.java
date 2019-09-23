@@ -27,7 +27,7 @@ public class UtilityService {
         Unmarshaller unmarshaller = pain001Context.createUnmarshaller();
         XMLStreamReader reader = XMLInputFactory.newInstance().createXMLStreamReader(new StringReader(xml));
         Document pain001 = (Document) unmarshaller.unmarshal(reader);
-        pain001.getCstmrCdtTrfInitn().getGrpHdr().getMsgId();
+
         return  pain001;
     }
 

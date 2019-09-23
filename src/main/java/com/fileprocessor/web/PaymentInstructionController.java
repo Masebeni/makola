@@ -4,11 +4,14 @@ import com.fileprocessor.persistence.PaymentInstruction;
 import com.fileprocessor.services.PaymentInstructionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.stream.XMLStreamException;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -24,7 +27,7 @@ public class PaymentInstructionController {
     }
 
     @GetMapping("/files/{id}")
-    private PaymentInstruction getPaymentInstruction(@PathVariable("id") String id) throws Exception{
+    private Optional<PaymentInstruction> getPaymentInstruction(@PathVariable("id") String id) throws Exception{
         return paymentInstructionService.getPaymentInstructionById(id);
     }
 
@@ -39,7 +42,8 @@ public class PaymentInstructionController {
     }
 
     @PostMapping("/files/xml")
-    private void processPaymentInstruction(@RequestBody String xml) throws JAXBException, XMLStreamException {
+    private ResponseEntity processPaymentInstruction(@RequestBody String xml) throws JAXBException, XMLStreamException {
         paymentInstructionService.processPaymentInstruction(xml);
+        return  new ResponseEntity(HttpStatus.CREATED);
     }
 }

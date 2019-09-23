@@ -24,10 +24,10 @@ public class PaymentInstructionService {
         paymentInstructionRepository.save(paymentInstruction);
     }
 
-    public PaymentInstruction getPaymentInstructionById(final String id) throws Exception{
+    public Optional<PaymentInstruction> getPaymentInstructionById(final String id) throws Exception{
         Optional<PaymentInstruction> paymentInstruction = paymentInstructionRepository.findById(id);
         if (paymentInstruction.isPresent()) {
-            return paymentInstructionRepository.findById(id).get();
+            return paymentInstructionRepository.findById(id);
         } else {
             System.out.println("No id present " + id);
             return null;
@@ -47,10 +47,13 @@ public class PaymentInstructionService {
 
     public void processPaymentInstruction(final String xml) throws JAXBException, XMLStreamException {
         Document pain001 = utilityService.unmarshal(xml);
-        //TODO create payment instruction to post to db
-        //example
+
         PaymentInstruction paymentInstruction = new PaymentInstruction();
         paymentInstruction.setMessageId(pain001.getCstmrCdtTrfInitn().getGrpHdr().getMsgId());
+        paymentInstruction.setCreDtTm(pain001.getCstmrCdtTrfInitn().getGrpHdr().getCreDtTm());
+        paymentInstruction.setCtrlSum(pain001.getCstmrCdtTrfInitn().getGrpHdr().getCtrlSum());
+        paymentInstruction.setPmtInfId(pain001.getCstmrCdtTrfInitn().getPmtInves().get(0).getPmtInfId());
+        paymentInstruction.setXml(xml);
         paymentInstructionRepository.save(paymentInstruction);
     }
 }
