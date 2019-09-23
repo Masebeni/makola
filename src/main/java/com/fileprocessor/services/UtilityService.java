@@ -18,7 +18,6 @@ import java.io.StringWriter;
 public class UtilityService {
     private static final Logger log = LoggerFactory.getLogger(UtilityService.class);
 
-
     private JAXBContext pain001Context;
 
 

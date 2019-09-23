@@ -2,6 +2,8 @@ package com.fileprocessor.services;
 
 import com.fileprocessor.persistence.PaymentInstruction;
 import com.fileprocessor.repository.PaymentInstructionRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.xml.bind.JAXBException;
@@ -13,6 +15,7 @@ import iso.std.iso._20022.tech.xsd.pain_001_001.Document;
 
 @Service
 public class PaymentInstructionService {
+    private static final Logger log = LoggerFactory.getLogger(PaymentInstructionService.class);
 
     @Autowired
     private PaymentInstructionRepository paymentInstructionRepository;
@@ -26,12 +29,15 @@ public class PaymentInstructionService {
 
     public Optional<PaymentInstruction> getPaymentInstructionById(final String id) throws Exception{
         Optional<PaymentInstruction> paymentInstruction = paymentInstructionRepository.findById(id);
-        if (paymentInstruction.isPresent()) {
-            return paymentInstructionRepository.findById(id);
-        } else {
+        try {
+            if (paymentInstruction.isPresent()) {
+                return paymentInstructionRepository.findById(id);
+            }
+        } catch (Exception ex) {
             System.out.println("No id present " + id);
-            return null;
+            throw ex;
         }
+        return paymentInstruction;
     }
 
     public List<PaymentInstruction> getAllPaymentInstructions() {
