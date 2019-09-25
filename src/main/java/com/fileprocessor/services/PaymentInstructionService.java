@@ -23,21 +23,30 @@ public class PaymentInstructionService {
     @Autowired
     private UtilityService utilityService;
 
+    public void processPaymentInstruction(final String xml) throws JAXBException, XMLStreamException {
+        Document pain001 = utilityService.unmarshal(xml);
+
+        PaymentInstruction paymentInstruction = new PaymentInstruction();
+        paymentInstruction.setMessageId(pain001.getCstmrCdtTrfInitn().getGrpHdr().getMsgId());
+        paymentInstruction.setCreDtTm(pain001.getCstmrCdtTrfInitn().getGrpHdr().getCreDtTm());
+        paymentInstruction.setCtrlSum(pain001.getCstmrCdtTrfInitn().getGrpHdr().getCtrlSum());
+        paymentInstruction.setPmtInfId(pain001.getCstmrCdtTrfInitn().getPmtInves().get(0).getPmtInfId());
+        paymentInstruction.setXml(xml);
+        paymentInstructionRepository.save(paymentInstruction);
+    }
+
     public void save(final PaymentInstruction paymentInstruction) {
         paymentInstructionRepository.save(paymentInstruction);
     }
 
     public Optional<PaymentInstruction> getPaymentInstructionById(final String id) throws Exception{
         Optional<PaymentInstruction> paymentInstruction = paymentInstructionRepository.findById(id);
-        try {
-            if (paymentInstruction.isPresent()) {
-                return paymentInstructionRepository.findById(id);
-            }
-        } catch (Exception ex) {
-            System.out.println("No id present " + id);
-            throw ex;
+        if (paymentInstruction.isPresent()) {
+            return paymentInstructionRepository.findById(id);
+        } else{
+            log.debug("No id present " + id);
+            return paymentInstruction;
         }
-        return paymentInstruction;
     }
 
     public List<PaymentInstruction> getAllPaymentInstructions() {
@@ -51,15 +60,4 @@ public class PaymentInstructionService {
         paymentInstructionRepository.deleteById(id);
     }
 
-    public void processPaymentInstruction(final String xml) throws JAXBException, XMLStreamException {
-        Document pain001 = utilityService.unmarshal(xml);
-
-        PaymentInstruction paymentInstruction = new PaymentInstruction();
-        paymentInstruction.setMessageId(pain001.getCstmrCdtTrfInitn().getGrpHdr().getMsgId());
-        paymentInstruction.setCreDtTm(pain001.getCstmrCdtTrfInitn().getGrpHdr().getCreDtTm());
-        paymentInstruction.setCtrlSum(pain001.getCstmrCdtTrfInitn().getGrpHdr().getCtrlSum());
-        paymentInstruction.setPmtInfId(pain001.getCstmrCdtTrfInitn().getPmtInves().get(0).getPmtInfId());
-        paymentInstruction.setXml(xml);
-        paymentInstructionRepository.save(paymentInstruction);
-    }
 }

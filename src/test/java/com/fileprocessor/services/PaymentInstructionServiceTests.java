@@ -17,8 +17,6 @@ import java.util.Optional;
 public class PaymentInstructionServiceTests {
 
     @Autowired
-    private UtilityService utilityService;
-    @Autowired
     PaymentInstructionService paymentInstructionService;
 
     @Test
@@ -33,10 +31,6 @@ public class PaymentInstructionServiceTests {
     public void testGetPaymentInstructionByMessageId() throws Exception {
         String xml = new String(Files.readAllBytes(Paths.get("src/main/resources/pain/pain.001.001.005.xml")));
         paymentInstructionService.processPaymentInstruction(xml);
-        Document pain001 = utilityService.unmarshal(xml);
-
-        PaymentInstruction paymentInstruction = new PaymentInstruction();
-        paymentInstruction.setMessageId(pain001.getCstmrCdtTrfInitn().getGrpHdr().getMsgId());
 
         Assert.assertNotEquals(null,paymentInstructionService.getPaymentInstructionById("F/NBC/DRT/AAH/20190906/14444076377"));
     }
@@ -53,9 +47,7 @@ public class PaymentInstructionServiceTests {
     public void testDeletePaymentInstructionById() throws Exception {
         String xml = new String(Files.readAllBytes(Paths.get("src/main/resources/pain/pain.001.001.005.xml")));
         paymentInstructionService.processPaymentInstruction(xml);
-        System.out.println("---------> PaymentInstructionId: " + paymentInstructionService.getPaymentInstructionById("F/NBC/DRT/AAH/20190906/14444076377"));
         paymentInstructionService.deletePaymentInstructionById("F/NBC/DRT/AAH/20190906/14444076377");
-        System.out.println("--------->Deleted PaymentInstructionId: " + paymentInstructionService.getPaymentInstructionById("F/NBC/DRT/AAH/20190906/14444076377"));
 
         Assert.assertEquals(Optional.empty(), paymentInstructionService.getPaymentInstructionById("F/NBC/DRT/AAH/20190906/14444076377"));
     }
