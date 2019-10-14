@@ -26,6 +26,9 @@ target/
 /nbdist/
 /.nb-gradle/
 build/
+/*.cmake
+/*.DS_Store
+/.user/buildetc.
 
 ### VS Code ###
 .vscode/
